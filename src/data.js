@@ -1,6 +1,6 @@
 var covers = [
   './assets/bluebrocade.jpg',
-  './assets/dance.jpg', 
+  './assets/dance.jpg',
   './assets/embrace.jpg',
   './assets/fire.png',
   './assets/frock.png',
@@ -90,3 +90,9 @@ var descriptors = [
   "blessings",
   "melancholy"
 ];
+
+module.exports = {
+  covers: covers,
+  titles: titles,
+  descriptors:descriptors
+}
