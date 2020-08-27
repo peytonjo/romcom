@@ -94,5 +94,5 @@ var descriptors = [
 module.exports = {
   covers: covers,
   titles: titles,
-  descriptors:descriptors
+  descriptors: descriptors
 }
