@@ -90,3 +90,9 @@ var descriptors = [
   "blessings",
   "melancholy"
 ];
+
+module.exports = {
+  covers: covers,
+  titles: titles,
+  descriptors: descriptors
+}

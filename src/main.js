@@ -1,6 +1,9 @@
 var descriptors = require('./data.js').descriptors
+var covers = require('./data.js').covers
+var titles = require('./data.js').titles
 // Create variables targetting the relevant DOM elements here 👇
 
+// Create variables targetting the relevant DOM elements here 👇
 
 // We've provided a few variables below
 var savedCovers = [
@@ -19,6 +22,23 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
+
+//Get random image
+function getRandomImage(){
+  var randomImageIndex = getRandomIndex(covers);
+  var randomImage = covers[randomImageIndex];
+
+  return randomImage;
+}
+
+
+//Get random titles
+function getRandomTitle(){
+  var randomTitleIndex = getRandomIndex(titles);
+  var randomTitle = titles[randomTitleIndex];
+
+  return randomTitle;
+}
 function getDescriptor() {
   var index = getRandomIndex(descriptors)
   return descriptors[index]
