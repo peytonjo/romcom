@@ -1,3 +1,5 @@
+var descriptors = require('./data.js').descriptors
+
 // Create variables targetting the relevant DOM elements here 👇
 
 
@@ -16,4 +18,10 @@ var currentCover;
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+function getDescriptor() {
+// take 1 descriptor from the array
+  var index = getRandomIndex(descriptors);
+  return descriptors[index]
 }
