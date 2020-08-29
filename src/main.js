@@ -5,9 +5,11 @@ var descriptorOne = document.querySelector('.tagline-1');
 var descriptorTwo = document.querySelector('.tagline-2');
 var ranCoverButton = document.querySelector('.random-cover-button');
 var moveToFormButton = document.querySelector('.make-new-button');
-var coverForm = document.querySelector('.form-view')
-var homePage = document.querySelector('.home-view')
-
+var coverForm = document.querySelector('.form-view');
+var homePage = document.querySelector('.home-view');
+var randomCoverButton = document.querySelector('.random-cover-button');
+var saveCoverButton = document.querySelector('.save-cover-button');
+var homeButton = document.querySelector('.home-button');
 
 // On page load generate random values
 generateRandomCover();
@@ -20,26 +22,35 @@ var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),g
 
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
-moveToFormButton.addEventListener("click", displayHiddenForm);
-// moveToFormButton.addEventListener("click", hideHomeView);
+moveToFormButton.addEventListener("click", onClick);
+homeButton.addEventListener("click", homeButtonOnClick);
 
 // Create your event handlers and other functions here 👇
-//
-// function hideHomeView() {
-  // homePage.style.display = 'none'
-// }
-
-function displayHiddenForm() {
-
-  if (coverForm.style.display === '') {
-    coverForm.style.display = 'block'
-    homePage.style.display = 'none'
-  } else {
-
-  }
-  console.log(coverForm.style.display);
+function onClick() {
+  displayHiddenForm();
+  hideButtons();
+  addHomeButton();
 };
 
+function hideButtons() {
+  randomCoverButton.classList.add('hidden')
+  saveCoverButton.classList.add('hidden')
+};
+
+function addHomeButton() {
+  homeButton.classList.remove('hidden')
+};
+
+function displayHiddenForm() {
+  coverForm.classList.remove('hidden')
+  homePage.classList.add('hidden')
+};
+
+function homeButtonOnClick() {
+  homePage.classList.remove('hidden')
+  coverForm.classList.add('hidden')
+};
+ 
 
 function generateRandomCover(){
   var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor())
