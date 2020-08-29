@@ -28,16 +28,16 @@ homeButton.addEventListener("click", homeButtonOnClick);
 // Create your event handlers and other functions here 👇
 function onClick() {
   displayHiddenForm();
-  hideButtons();
-  addHomeButton();
+  formHideButtons();
+  formAddHomeButton();
 };
 
-function hideButtons() {
+function formHideButtons() {
   randomCoverButton.classList.add('hidden')
   saveCoverButton.classList.add('hidden')
 };
 
-function addHomeButton() {
+function formAddHomeButton() {
   homeButton.classList.remove('hidden')
 };
 
@@ -47,10 +47,24 @@ function displayHiddenForm() {
 };
 
 function homeButtonOnClick() {
+  displayHomePage();
+  homeHideButton();
+  homeAddButtons();
+};
+
+function displayHomePage() {
+  randomCoverButton.classList.remove('hidden')
+  saveCoverButton.classList.remove('hidden')
+};
+
+function homeHideButton() {
+  homeButton.classList.add('hidden')
+};
+
+function homeAddButtons() {
   homePage.classList.remove('hidden')
   coverForm.classList.add('hidden')
 };
- 
 
 function generateRandomCover(){
   var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor())
