@@ -9,6 +9,8 @@ var coverForm = document.querySelector('.form-view');
 var homePage = document.querySelector('.home-view');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var homeButton = document.querySelector('.home-button');
+var viewSavedCoversBtn = document.querySelector(".view-saved-button");
+var savedPage = document.querySelector(".saved-view");
 
 // On page load generate random values
 generateRandomCover();
@@ -21,22 +23,48 @@ var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),g
 
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
-moveToFormButton.addEventListener("click", onClick);
-homeButton.addEventListener("click", homeButtonOnClick);
+moveToFormButton.addEventListener("click", viewForm);
+homeButton.addEventListener("click", viewHome);
+viewSavedCoversBtn.addEventListener("click", viewSavedCovers);
 
 // Create your event handlers and other functions here 👇
-function onClick() {
-  displayHiddenForm();
-  formHideButtons();
-  formAddHomeButton();
+
+
+function viewHome() {
+  displayHomePage();
+  homeHideButton();
+  homeAddButtons();
+  hideSavedCoversPage();
+  hideCoverFormPage();
 };
 
-function formHideButtons() {
+function viewSavedCovers(){
+  displayHiddenSavedCovers();
+  addHomeButton();
+  hideCoverButtons();
+}
+
+function viewForm() {
+  displayHiddenForm();
+  hideCoverButtons();
+  addHomeButton();
+};
+
+function displayHiddenSavedCovers(){
+  savedPage.classList.remove("hidden")
+  homePage.classList.add("hidden")
+}
+
+function hideSavedCoversPage(){
+  savedPage.classList.add("hidden")
+}
+
+function hideCoverButtons() {
   ranCoverButton.classList.add('hidden')
   saveCoverButton.classList.add('hidden')
 };
 
-function formAddHomeButton() {
+function addHomeButton() {
   homeButton.classList.remove('hidden')
 };
 
@@ -45,16 +73,13 @@ function displayHiddenForm() {
   homePage.classList.add('hidden')
 };
 
-function homeButtonOnClick() {
-  displayHomePage();
-  homeHideButton();
-  homeAddButtons();
-};
-
 function displayHomePage() {
   homePage.classList.remove('hidden')
-  coverForm.classList.add('hidden')
 };
+
+function hideCoverFormPage(){
+  coverForm.classList.add('hidden')
+}
 
 function homeHideButton() {
   homeButton.classList.add('hidden')
