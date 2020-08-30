@@ -7,7 +7,6 @@ var ranCoverButton = document.querySelector('.random-cover-button');
 var moveToFormButton = document.querySelector('.make-new-button');
 var coverForm = document.querySelector('.form-view');
 var homePage = document.querySelector('.home-view');
-var randomCoverButton = document.querySelector('.random-cover-button');
 var saveCoverButton = document.querySelector('.save-cover-button');
 var homeButton = document.querySelector('.home-button');
 
@@ -33,7 +32,7 @@ function onClick() {
 };
 
 function formHideButtons() {
-  randomCoverButton.classList.add('hidden')
+  ranCoverButton.classList.add('hidden')
   saveCoverButton.classList.add('hidden')
 };
 
@@ -53,8 +52,8 @@ function homeButtonOnClick() {
 };
 
 function displayHomePage() {
-  randomCoverButton.classList.remove('hidden')
-  saveCoverButton.classList.remove('hidden')
+  homePage.classList.remove('hidden')
+  coverForm.classList.add('hidden')
 };
 
 function homeHideButton() {
@@ -62,8 +61,8 @@ function homeHideButton() {
 };
 
 function homeAddButtons() {
-  homePage.classList.remove('hidden')
-  coverForm.classList.add('hidden')
+  ranCoverButton.classList.remove('hidden')
+  saveCoverButton.classList.remove('hidden')
 };
 
 function generateRandomCover(){
