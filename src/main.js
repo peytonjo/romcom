@@ -12,6 +12,12 @@ var homeButton = document.querySelector('.home-button');
 var viewSavedCoversBtn = document.querySelector(".view-saved-button");
 var savedPage = document.querySelector(".saved-view");
 var makeNewBookBtn = document.querySelector('.create-new-book-button');
+var userTitleInput = document.querySelector('#title');
+var userImgInput = document.querySelector('#cover');
+var userDescriptorInput1 = document.querySelector('#descriptor1')
+var userDescriptorInput2 = document.querySelector('#descriptor2')
+
+
 
 // On page load generate random values
 generateRandomCover();
@@ -20,18 +26,49 @@ generateRandomCover();
 var savedCovers = [
 ];
 
-var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor());
-
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
 moveToFormButton.addEventListener("click", viewForm);
 homeButton.addEventListener("click", viewHome);
 viewSavedCoversBtn.addEventListener("click", viewSavedCovers);
-makeNewBookBtn.addEventListener('click', savedNewBookInputs);
+makeNewBookBtn.addEventListener("click", saveNewBookInputs)
 
 // Create your event handlers and other functions here 👇
+function saveNewBookInputs(event){
+  event.preventDefault();
+  imgInput();
+  titleInput();
+  firstDescriptorInput();
+  secondDescriptorInput();
+  generateUserCover();
+}
 
+function imgInput(){ // look into refactor (dynamic inputs ??)
+  covers.push(userImgInput.value)
+}
 
+function titleInput(){ // look into refactor (dynamic inputs ??)
+  titles.push(userTitleInput.value)
+}
+
+function firstDescriptorInput(){ // look into refactor (dynamic inputs ??)
+  descriptors.push(userDescriptorInput1.value)
+}
+
+function secondDescriptorInput(){ // look into refactor (dynamic inputs ??)
+  descriptors.push(userDescriptorInput2.value)
+}
+
+function generateUserCover() {  // this is a lot like generateRandomCover can we make one function dynamic?
+  var userCover = new Cover(userImgInput.value, userTitleInput.value, userDescriptorInput1.value, userDescriptorInput2.value)
+
+  descriptorOne.innerText = userCover.tagline1;
+  descriptorTwo.innerText = userCover.tagline2;
+  randomImg.src = userCover.cover;
+  randomCoverTitle.innerText = userCover.title;
+
+  viewHome();
+}
 
 
 function viewHome() {
@@ -43,6 +80,7 @@ function viewHome() {
 };
 
 function viewSavedCovers(){
+  hideCoverFormPage();
   displayHiddenSavedCovers();
   addHomeButton();
   hideCoverButtons();
@@ -96,20 +134,6 @@ function homeAddButtons() {
 
 
 function generateRandomCover() {
-  // console.log(covers.length);
-  // console.log(covers);
-  if (covers.length > 27) {
-    // console.log(covers.length, covers);
-    // console.log("hi");
-    var userImage = covers[covers.length - 1]
-    var userTitles = titles[titles.length -1]
-    var userDescriptorOne = descriptors[descriptors.length - 1]
-    var userDescriptorTwo = descriptors[descriptors.length - 2]
-    // console.log(userDescriptorOne, userDescriptorTwo)
-
-    return new Cover(userImage, userTitles, userDescriptorOne, userDescriptorTwo)
-    };
-
   var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor())
 
   descriptorOne.innerText = currentCover.tagline1;
@@ -142,24 +166,5 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
 
-function savedNewBookInputs(e) {
-  e.preventDefault()
-  var titleInput = document.querySelector('#title')
-  titles.push(titleInput.value);
-  console.log(titles)
 
-  var coverInput = document.querySelector('#cover')
-  covers.push(coverInput.value);
-
-  var descriptorOneInput = document.querySelector('#descriptor1')
-  descriptors.push(descriptorOneInput.value);
-
-  var descriptorTwoInput = document.querySelector('#descriptor2')
-  descriptors.push(descriptorTwoInput.value);
-  // console.log(titles)
-  // console.log(covers)
-  // console.log(descriptors)
-
-  var custom = new Cover(coverInput.value, titleInput.value, descriptorOneInput.value, descriptorTwoInput.value)
-  viewHome();
-}
+  // var custom = new Cover(coverInput.value, titleInput.value, descriptorOneInput.value, descriptorTwoInput.value)
