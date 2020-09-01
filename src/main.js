@@ -26,14 +26,22 @@ generateRandomCover();
 var savedCovers = [
 ];
 
+// On page load generate random values
+var currentCover = generateRandomCover();
+
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
 moveToFormButton.addEventListener("click", viewForm);
 homeButton.addEventListener("click", viewHome);
 viewSavedCoversBtn.addEventListener("click", viewSavedCovers);
 makeNewBookBtn.addEventListener("click", saveNewBookInputs)
+saveCoverButton.addEventListener("click", saveNewCover)
 
 // Create your event handlers and other functions here 👇
+function saveNewCover(){
+  savedCovers.push(currentCover)
+}
+
 function saveNewBookInputs(event){
   event.preventDefault();
   imgInput();
@@ -140,6 +148,8 @@ function generateRandomCover() {
   descriptorTwo.innerText = currentCover.tagline2;
   randomImg.src = currentCover.cover;
   randomCoverTitle.innerText = currentCover.title;
+
+  return currentCover;
 };
 
 function getRandomImage() {
