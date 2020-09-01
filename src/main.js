@@ -14,9 +14,9 @@ var savedPage = document.querySelector(".saved-view");
 var makeNewBookBtn = document.querySelector('.create-new-book-button');
 var userTitleInput = document.querySelector('#title');
 var userImgInput = document.querySelector('#cover');
-var userDescriptorInput1 = document.querySelector('#descriptor1');
-var userDescriptorInput2 = document.querySelector('#descriptor2');
-var saveButton = document.querySelector('.save-cover-button');
+var userDescriptorInput1 = document.querySelector('#descriptor1')
+var userDescriptorInput2 = document.querySelector('#descriptor2')
+
 
 
 // On page load generate random values
@@ -25,39 +25,21 @@ generateRandomCover();
 // We've provided a few variables below
 var savedCovers = [];
 
+// On page load generate random values
+var currentCover = generateRandomCover();
+
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
 moveToFormButton.addEventListener("click", viewForm);
 homeButton.addEventListener("click", viewHome);
 viewSavedCoversBtn.addEventListener("click", viewSavedCovers);
 makeNewBookBtn.addEventListener("click", saveNewBookInputs)
-saveButton.addEventListener('click', saveCover)
+saveCoverButton.addEventListener("click", saveNewCover)
 
 // Create your event handlers and other functions here 👇
-function saveCover(event) {
-  event.preventDefault();
-  var coverToSave =  new Cover(randomImg.src, randomCoverTitle.innerText, descriptorOne.innerText, descriptorTwo.innerText);
-};
-
-
- // look through the savedCovers array
- // compare coverToSave img, title, descriptors with each items img, title, descriptors in savedCovers
-
-// function checkDuplicates() {
-//   for (var i = 0; i < savedCovers.length + 1; i++) {
-//     if (savedCovers.length < 1 || savedCovers[i].cover !== randomImg.src) {
-//       savedCovers.push(coverToSave)
-//     } else {
-//     }
-//   }
-
-  // if (savedCovers.find(cover => cover.cover === randomImg.src) == undefined) {
-  //   console.log('hi')
-  //   savedCovers.push(coverToSave)
-  // } else {
-  //   console.log('yay')
-  // }
-// };
+function saveNewCover(){
+  savedCovers.push(currentCover)
+}
 
 function saveNewBookInputs(event){
   event.preventDefault();
@@ -68,19 +50,19 @@ function saveNewBookInputs(event){
   generateUserCover();
 }
 
-function imgInput(){
+function imgInput(){ // look into refactor (dynamic inputs ??)
   covers.push(userImgInput.value)
 }
 
-function titleInput(){
+function titleInput(){ // look into refactor (dynamic inputs ??)
   titles.push(userTitleInput.value)
 }
 
-function firstDescriptorInput(){
+function firstDescriptorInput(){ // look into refactor (dynamic inputs ??)
   descriptors.push(userDescriptorInput1.value)
 }
 
-function secondDescriptorInput(){
+function secondDescriptorInput(){ // look into refactor (dynamic inputs ??)
   descriptors.push(userDescriptorInput2.value)
 }
 
@@ -108,7 +90,7 @@ function viewSavedCovers(){
   displayHiddenSavedCovers();
   addHomeButton();
   hideCoverButtons();
-}
+};
 
 function viewForm() {
   displayHiddenForm();
@@ -119,11 +101,11 @@ function viewForm() {
 function displayHiddenSavedCovers(){
   savedPage.classList.remove("hidden")
   homePage.classList.add("hidden")
-}
+};
 
 function hideSavedCoversPage(){
   savedPage.classList.add("hidden")
-}
+};
 
 function hideCoverButtons() {
   ranCoverButton.classList.add('hidden')
@@ -145,7 +127,7 @@ function displayHomePage() {
 
 function hideCoverFormPage(){
   coverForm.classList.add('hidden')
-}
+};
 
 function homeHideButton() {
   homeButton.classList.add('hidden')
@@ -156,16 +138,19 @@ function homeAddButtons() {
   saveCoverButton.classList.remove('hidden')
 };
 
-function generateRandomCover(){
+
+function generateRandomCover() {
   var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor())
 
   descriptorOne.innerText = currentCover.tagline1;
   descriptorTwo.innerText = currentCover.tagline2;
   randomImg.src = currentCover.cover;
   randomCoverTitle.innerText = currentCover.title;
+
+  return currentCover;
 };
 
-function getRandomImage(){
+function getRandomImage() {
   var randomImageIndex = getRandomIndex(covers);
   var randomImage = covers[randomImageIndex];
 
@@ -188,3 +173,6 @@ function getDescriptor() {
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
+
+
+  // var custom = new Cover(coverInput.value, titleInput.value, descriptorOneInput.value, descriptorTwoInput.value)
