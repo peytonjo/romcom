@@ -12,6 +12,11 @@ var homeButton = document.querySelector('.home-button');
 var viewSavedCoversBtn = document.querySelector(".view-saved-button");
 var savedPage = document.querySelector(".saved-view");
 var makeNewBookBtn = document.querySelector('.create-new-book-button');
+var userTitleInput = document.querySelector('#title');
+var userImgInput = document.querySelector('#cover');
+var userDescriptorInput1 = document.querySelector('#descriptor1')
+var userDescriptorInput2 = document.querySelector('#descriptor2')
+
 
 
 // On page load generate random values
@@ -30,35 +35,41 @@ makeNewBookBtn.addEventListener("click", saveNewBookInputs)
 
 // Create your event handlers and other functions here 👇
 function saveNewBookInputs(event){
-  imgInput(event);
-  titleInput(event);
-  firstDescriptorInput(event);
-  secondDescriptorInput(event);
+  event.preventDefault();
+  imgInput();
+  titleInput();
+  firstDescriptorInput();
+  secondDescriptorInput();
+  generateUserCover();
 }
 
-function imgInput(event){
-  event.preventDefault()
-  var userImgInput = document.querySelector('#cover')
+function imgInput(){ // look into refactor (dynamic inputs ??)
   covers.push(userImgInput.value)
 }
 
-function titleInput(event){
-  event.preventDefault()
-  var userTitleInput = document.querySelector('#title')
+function titleInput(){ // look into refactor (dynamic inputs ??)
   titles.push(userTitleInput.value)
 }
 
-function firstDescriptorInput(event){
-  event.preventDefault()
-  var userDescriptorInput1 = document.querySelector('#descriptor1')
+function firstDescriptorInput(){ // look into refactor (dynamic inputs ??)
   descriptors.push(userDescriptorInput1.value)
 }
 
-function secondDescriptorInput(event){
-  event.preventDefault()
-  var userDescriptorInput2 = document.querySelector('#descriptor2')
+function secondDescriptorInput(){ // look into refactor (dynamic inputs ??)
   descriptors.push(userDescriptorInput2.value)
 }
+
+function generateUserCover() {  // this is a lot like generateRandomCover can we make one function dynamic?
+  var userCover = new Cover(userImgInput.value, userTitleInput.value, userDescriptorInput1.value, userDescriptorInput2.value)
+
+  descriptorOne.innerText = userCover.tagline1;
+  descriptorTwo.innerText = userCover.tagline2;
+  randomImg.src = userCover.cover;
+  randomCoverTitle.innerText = userCover.title;
+
+  viewHome();
+}
+
 
 function viewHome() {
   displayHomePage();
@@ -73,7 +84,7 @@ function viewSavedCovers(){
   displayHiddenSavedCovers();
   addHomeButton();
   hideCoverButtons();
-}
+};
 
 function viewForm() {
   displayHiddenForm();
@@ -84,11 +95,11 @@ function viewForm() {
 function displayHiddenSavedCovers(){
   savedPage.classList.remove("hidden")
   homePage.classList.add("hidden")
-}
+};
 
 function hideSavedCoversPage(){
   savedPage.classList.add("hidden")
-}
+};
 
 function hideCoverButtons() {
   ranCoverButton.classList.add('hidden')
@@ -110,7 +121,7 @@ function displayHomePage() {
 
 function hideCoverFormPage(){
   coverForm.classList.add('hidden')
-}
+};
 
 function homeHideButton() {
   homeButton.classList.add('hidden')
@@ -121,7 +132,8 @@ function homeAddButtons() {
   saveCoverButton.classList.remove('hidden')
 };
 
-function generateRandomCover(){
+
+function generateRandomCover() {
   var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor())
 
   descriptorOne.innerText = currentCover.tagline1;
@@ -130,7 +142,7 @@ function generateRandomCover(){
   randomCoverTitle.innerText = currentCover.title;
 };
 
-function getRandomImage(){
+function getRandomImage() {
   var randomImageIndex = getRandomIndex(covers);
   var randomImage = covers[randomImageIndex];
 
@@ -153,3 +165,6 @@ function getDescriptor() {
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
+
+
+  // var custom = new Cover(coverInput.value, titleInput.value, descriptorOneInput.value, descriptorTwoInput.value)
