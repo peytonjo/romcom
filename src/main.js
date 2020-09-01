@@ -12,15 +12,36 @@ var homeButton = document.querySelector('.home-button');
 var viewSavedCoversBtn = document.querySelector(".view-saved-button");
 var savedPage = document.querySelector(".saved-view");
 var makeNewBookBtn = document.querySelector('.create-new-book-button');
-
+var savedCoverSection = document.querySelector('.saved-covers-section')
 
 // On page load generate random values
 generateRandomCover();
 
 // We've provided a few variables below
 var savedCovers = [
-];
 
+];
+function addSavedCovers(){
+  for(var i = 0; i < savedCovers.length; i++){
+    savedCoverSection.innerHTML += `
+      <section class="mini-cover">
+        <img class="cover-image" src= ${savedCovers[i].cover}>
+        <h2 class="cover-title"> ${savedCovers[i].title} </h2>
+        <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+        <img class="price-tag" src="./assets/price.png">
+        <img class="overlay" src="./assets/overlay.png">
+      </section>
+    `
+  }
+}
+
+
+function displayHiddenSavedCovers(){
+
+  savedPage.classList.remove("hidden")
+  homePage.classList.add("hidden")
+  addSavedCovers();
+}
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
 moveToFormButton.addEventListener("click", viewForm);
@@ -80,11 +101,6 @@ function viewForm() {
   hideCoverButtons();
   addHomeButton();
 };
-
-function displayHiddenSavedCovers(){
-  savedPage.classList.remove("hidden")
-  homePage.classList.add("hidden")
-}
 
 function hideSavedCoversPage(){
   savedPage.classList.add("hidden")
