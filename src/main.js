@@ -16,17 +16,13 @@ var userTitleInput = document.querySelector('#title');
 var userImgInput = document.querySelector('#cover');
 var userDescriptorInput1 = document.querySelector('#descriptor1')
 var userDescriptorInput2 = document.querySelector('#descriptor2')
+var savedCoverSection = document.querySelector('.saved-covers-section')
 
-
-
-// On page load generate random values
 generateRandomCover();
-
 
 // We've provided a few variables below
 var savedCovers = [
 ];
-
 var currentCover;
 
 // Add your event listeners here 👇
@@ -106,10 +102,25 @@ function viewForm() {
   addHomeButton();
 };
 
+function addSavedCovers(){
+  for(var i = 0; i < savedCovers.length; i++){
+    savedCoverSection.innerHTML += `
+      <section class="mini-cover">
+        <img class="cover-image" src= ${savedCovers[i].cover}>
+        <h2 class="cover-title"> ${savedCovers[i].title} </h2>
+        <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+        <img class="price-tag" src="./assets/price.png">
+        <img class="overlay" src="./assets/overlay.png">
+      </section>
+    `
+  }
+}
+
 function displayHiddenSavedCovers(){
   savedPage.classList.remove("hidden")
   homePage.classList.add("hidden")
-};
+  addSavedCovers();
+}
 
 function hideSavedCoversPage(){
   savedPage.classList.add("hidden")
