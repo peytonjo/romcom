@@ -12,14 +12,18 @@ var homeButton = document.querySelector('.home-button');
 var viewSavedCoversBtn = document.querySelector(".view-saved-button");
 var savedPage = document.querySelector(".saved-view");
 var makeNewBookBtn = document.querySelector('.create-new-book-button');
+var userTitleInput = document.querySelector('#title');
+var userImgInput = document.querySelector('#cover');
+var userDescriptorInput1 = document.querySelector('#descriptor1');
+var userDescriptorInput2 = document.querySelector('#descriptor2');
+var saveButton = document.querySelector('.save-cover-button');
 
 
 // On page load generate random values
 generateRandomCover();
 
 // We've provided a few variables below
-var savedCovers = [
-];
+var savedCovers = [];
 
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
@@ -27,37 +31,68 @@ moveToFormButton.addEventListener("click", viewForm);
 homeButton.addEventListener("click", viewHome);
 viewSavedCoversBtn.addEventListener("click", viewSavedCovers);
 makeNewBookBtn.addEventListener("click", saveNewBookInputs)
+saveButton.addEventListener('click', saveCover)
 
 // Create your event handlers and other functions here 👇
+function saveCover(event) {
+  event.preventDefault();
+  var coverToSave =  new Cover(randomImg.src, randomCoverTitle.innerText, descriptorOne.innerText, descriptorTwo.innerText);
+};
+
+
+ // look through the savedCovers array
+ // compare coverToSave img, title, descriptors with each items img, title, descriptors in savedCovers
+
+// function checkDuplicates() {
+//   for (var i = 0; i < savedCovers.length + 1; i++) {
+//     if (savedCovers.length < 1 || savedCovers[i].cover !== randomImg.src) {
+//       savedCovers.push(coverToSave)
+//     } else {
+//     }
+//   }
+
+  // if (savedCovers.find(cover => cover.cover === randomImg.src) == undefined) {
+  //   console.log('hi')
+  //   savedCovers.push(coverToSave)
+  // } else {
+  //   console.log('yay')
+  // }
+// };
+
 function saveNewBookInputs(event){
-  imgInput(event);
-  titleInput(event);
-  firstDescriptorInput(event);
-  secondDescriptorInput(event);
+  event.preventDefault();
+  imgInput();
+  titleInput();
+  firstDescriptorInput();
+  secondDescriptorInput();
+  generateUserCover();
 }
 
-function imgInput(event){
-  event.preventDefault()
-  var userImgInput = document.querySelector('#cover')
+function imgInput(){
   covers.push(userImgInput.value)
 }
 
-function titleInput(event){
-  event.preventDefault()
-  var userTitleInput = document.querySelector('#title')
+function titleInput(){
   titles.push(userTitleInput.value)
 }
 
-function firstDescriptorInput(event){
-  event.preventDefault()
-  var userDescriptorInput1 = document.querySelector('#descriptor1')
+function firstDescriptorInput(){
   descriptors.push(userDescriptorInput1.value)
 }
 
-function secondDescriptorInput(event){
-  event.preventDefault()
-  var userDescriptorInput2 = document.querySelector('#descriptor2')
+function secondDescriptorInput(){
   descriptors.push(userDescriptorInput2.value)
+}
+
+function generateUserCover() {  // this is a lot like generateRandomCover can we make one function dynamic?
+  var userCover = new Cover(userImgInput.value, userTitleInput.value, userDescriptorInput1.value, userDescriptorInput2.value)
+
+  descriptorOne.innerText = userCover.tagline1;
+  descriptorTwo.innerText = userCover.tagline2;
+  randomImg.src = userCover.cover;
+  randomCoverTitle.innerText = userCover.title;
+
+  viewHome();
 }
 
 function viewHome() {
