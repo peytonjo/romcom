@@ -22,12 +22,12 @@ var userDescriptorInput2 = document.querySelector('#descriptor2')
 // On page load generate random values
 generateRandomCover();
 
+
 // We've provided a few variables below
 var savedCovers = [
 ];
 
-// On page load generate random values
-var currentCover = generateRandomCover();
+var currentCover;
 
 // Add your event listeners here 👇
 ranCoverButton.addEventListener("click", generateRandomCover);
@@ -38,9 +38,7 @@ makeNewBookBtn.addEventListener("click", saveNewBookInputs)
 saveCoverButton.addEventListener("click", saveNewCover)
 
 // Create your event handlers and other functions here 👇
-function saveNewCover(){
-  savedCovers.push(currentCover)
-}
+
 
 function saveNewBookInputs(event){
   event.preventDefault();
@@ -49,6 +47,7 @@ function saveNewBookInputs(event){
   firstDescriptorInput();
   secondDescriptorInput();
   generateUserCover();
+  viewHome();
 }
 
 function imgInput(){ // look into refactor (dynamic inputs ??)
@@ -75,9 +74,16 @@ function generateUserCover() {  // this is a lot like generateRandomCover can we
   randomImg.src = userCover.cover;
   randomCoverTitle.innerText = userCover.title;
 
-  viewHome();
+  currentCover = userCover
 }
 
+function saveNewCover() {
+  console.log('currentCover:', currentCover)
+ if (savedCovers.indexOf(currentCover) === -1) {
+   savedCovers.push(currentCover)
+   console.log(savedCovers)
+ }
+}
 
 function viewHome() {
   displayHomePage();
@@ -142,14 +148,14 @@ function homeAddButtons() {
 
 
 function generateRandomCover() {
-  var currentCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor())
+  var bookCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor());
 
-  descriptorOne.innerText = currentCover.tagline1;
-  descriptorTwo.innerText = currentCover.tagline2;
-  randomImg.src = currentCover.cover;
-  randomCoverTitle.innerText = currentCover.title;
+  descriptorOne.innerText = bookCover.tagline1;
+  descriptorTwo.innerText = bookCover.tagline2;
+  randomImg.src = bookCover.cover;
+  randomCoverTitle.innerText = bookCover.title;
 
-  return currentCover;
+  currentCover = bookCover
 };
 
 function getRandomImage() {
@@ -171,10 +177,8 @@ function getDescriptor() {
   return descriptors[index]
 };
 
+
 // We've provided one function to get you started
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 };
-
-
-  // var custom = new Cover(coverInput.value, titleInput.value, descriptorOneInput.value, descriptorTwoInput.value)
