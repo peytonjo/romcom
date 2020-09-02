@@ -14,9 +14,9 @@ var savedPage = document.querySelector(".saved-view");
 var makeNewBookBtn = document.querySelector('.create-new-book-button');
 var userTitleInput = document.querySelector('#title');
 var userImgInput = document.querySelector('#cover');
-var userDescriptorInput1 = document.querySelector('#descriptor1')
-var userDescriptorInput2 = document.querySelector('#descriptor2')
-var savedCoverSection = document.querySelector('.saved-covers-section')
+var userDescriptorInput1 = document.querySelector('#descriptor1');
+var userDescriptorInput2 = document.querySelector('#descriptor2');
+var savedCoverSection = document.querySelector('.saved-covers-section');
 
 generateRandomCover();
 
@@ -30,8 +30,8 @@ ranCoverButton.addEventListener("click", generateRandomCover);
 moveToFormButton.addEventListener("click", viewForm);
 homeButton.addEventListener("click", viewHome);
 viewSavedCoversBtn.addEventListener("click", viewSavedCovers);
-makeNewBookBtn.addEventListener("click", saveNewBookInputs)
-saveCoverButton.addEventListener("click", saveNewCover)
+makeNewBookBtn.addEventListener("click", saveNewBookInputs);
+saveCoverButton.addEventListener("click", saveNewCover);
 
 // Create your event handlers and other functions here 👇
 
@@ -44,62 +44,40 @@ function saveNewBookInputs(event){
   secondDescriptorInput();
   generateUserCover();
   viewHome();
-}
+};
 
-function imgInput(){ // look into refactor (dynamic inputs ??)
+function imgInput(){
   covers.push(userImgInput.value)
-}
+};
 
-function titleInput(){ // look into refactor (dynamic inputs ??)
+function titleInput(){
   titles.push(userTitleInput.value)
-}
+};
 
-function firstDescriptorInput(){ // look into refactor (dynamic inputs ??)
+function firstDescriptorInput(){
   descriptors.push(userDescriptorInput1.value)
-}
+};
 
-function secondDescriptorInput(){ // look into refactor (dynamic inputs ??)
+function secondDescriptorInput(){
   descriptors.push(userDescriptorInput2.value)
-}
+};
 
-function generateUserCover() {  // this is a lot like generateRandomCover can we make one function dynamic?
+function generateUserCover(){
   var userCover = new Cover(userImgInput.value, userTitleInput.value, userDescriptorInput1.value, userDescriptorInput2.value)
-
   descriptorOne.innerText = userCover.tagline1;
   descriptorTwo.innerText = userCover.tagline2;
   randomImg.src = userCover.cover;
   randomCoverTitle.innerText = userCover.title;
 
   currentCover = userCover
-}
+};
 
-function saveNewCover() {
+function saveNewCover(){
   console.log('currentCover:', currentCover)
  if (savedCovers.indexOf(currentCover) === -1) {
    savedCovers.push(currentCover)
    console.log(savedCovers)
  }
-}
-
-function viewHome() {
-  displayHomePage();
-  homeHideButton();
-  homeAddButtons();
-  hideSavedCoversPage();
-  hideCoverFormPage();
-};
-
-function viewSavedCovers(){
-  hideCoverFormPage();
-  displayHiddenSavedCovers();
-  addHomeButton();
-  hideCoverButtons();
-};
-
-function viewForm() {
-  displayHiddenForm();
-  hideCoverButtons();
-  addHomeButton();
 };
 
 function addSavedCovers(){
@@ -114,33 +92,54 @@ function addSavedCovers(){
       </section>
     `
   }
-}
+};
+
+function viewHome(){
+  displayHomePage();
+  homeHideButton();
+  homeAddButtons();
+  hideSavedCoversPage();
+  hideCoverFormPage();
+};
+
+function viewSavedCovers(){
+  hideCoverFormPage();
+  displayHiddenSavedCovers();
+  addHomeButton();
+  hideCoverButtons();
+};
+
+function viewForm(){
+  displayHiddenForm();
+  hideCoverButtons();
+  addHomeButton();
+};
 
 function displayHiddenSavedCovers(){
   savedPage.classList.remove("hidden")
   homePage.classList.add("hidden")
   addSavedCovers();
-}
+};
 
 function hideSavedCoversPage(){
   savedPage.classList.add("hidden")
 };
 
-function hideCoverButtons() {
+function hideCoverButtons(){
   ranCoverButton.classList.add('hidden')
   saveCoverButton.classList.add('hidden')
 };
 
-function addHomeButton() {
+function addHomeButton(){
   homeButton.classList.remove('hidden')
 };
 
-function displayHiddenForm() {
+function displayHiddenForm(){
   coverForm.classList.remove('hidden')
   homePage.classList.add('hidden')
 };
 
-function displayHomePage() {
+function displayHomePage(){
   homePage.classList.remove('hidden')
 };
 
@@ -148,17 +147,16 @@ function hideCoverFormPage(){
   coverForm.classList.add('hidden')
 };
 
-function homeHideButton() {
+function homeHideButton(){
   homeButton.classList.add('hidden')
 };
 
-function homeAddButtons() {
+function homeAddButtons(){
   ranCoverButton.classList.remove('hidden')
   saveCoverButton.classList.remove('hidden')
 };
 
-
-function generateRandomCover() {
+function generateRandomCover(){
   var bookCover = new Cover(getRandomImage(),getRandomTitle(),getDescriptor(),getDescriptor());
 
   descriptorOne.innerText = bookCover.tagline1;
@@ -169,7 +167,7 @@ function generateRandomCover() {
   currentCover = bookCover
 };
 
-function getRandomImage() {
+function getRandomImage(){
   var randomImageIndex = getRandomIndex(covers);
   var randomImage = covers[randomImageIndex];
 
@@ -187,7 +185,6 @@ function getDescriptor() {
   var index = getRandomIndex(descriptors)
   return descriptors[index]
 };
-
 
 // We've provided one function to get you started
 function getRandomIndex(array) {
